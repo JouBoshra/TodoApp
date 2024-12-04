@@ -1,0 +1,17 @@
+.task-add-form {
+  width: 100%;
+  .add-form {
+    display: flex;
+    align-items: center;
+
+    .more-settings {
+      float: right;
+      color: #546f16;
+      text-decoration: underline;
+    }
+
+    .confirm-btn {
+      align-self: flex-start;
+    }
+  }
+}

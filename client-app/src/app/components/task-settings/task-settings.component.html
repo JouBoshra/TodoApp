@@ -1,0 +1,65 @@
+<div class="modal-wrapper">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Advance Task Settings</h5>
+        <button type="button" class="close" (click)="close.emit()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group row flex-row">
+            <label class="col-sm-3" for="title">Title:</label>
+            <input class="form-control col-sm-8" name="title" [(ngModel)]="title" type="text" required>
+          </div>
+          <div class="form-group row flex-row">
+            <label class="col-sm-3" for="description">Description:</label>
+            <textarea class="form-control col-sm-8" name="description" [(ngModel)]="description" type="text" required ></textarea>
+          </div>
+          <div class="form-group row flex-row">
+            <label class="col-sm-3" for="labels">Labels:</label>
+            <div class="add-labels col-sm-8">
+              <div class="label-show row">
+                <span *ngFor="let label of objectEntries(labels)"  [className]="'label badge-' + label[1]" >
+                  {{label[0]}}
+                  <span class="remove" (click)="removeLabel(label[0])">x</span>
+                </span>
+                <span class="add-button" *ngIf="!labelAddFormOpen" (click)="toggleLabelAddForm()">+</span>
+              </div>
+              <div class="label-form" *ngIf="labelAddFormOpen">
+                <div class="row">
+                  <span *ngFor="let label of objectEntries(availableLabels)" (click)="addLabel(label)" [className]="'label badge-' + label[1]" >
+                    {{label[0]}}
+                  </span>
+                </div>
+                <div class="custom-label-form row">
+                    <input type="text" class="form-control col-sm-4" name="customLabel" [(ngModel)]="customLabel" placeholder="Custom Label..."/>
+                    <select class="custom-select col-sm-3" name="customLabelType" [(ngModel)]="customLabelType">
+                      <option *ngFor="let labelType of labelTypes" [value]="labelType.value">{{ labelType.label }}</option>
+                    </select>
+                    <button class="confirm-btn col" (click)="addCustomLabel()" [disabled]="!customLabel">Add</button>
+                    <button class="btn confirm-btn col done" (click)="toggleLabelAddForm()">Done</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row flex-row">
+            <label class="col-sm-3" for="status">Status:</label>
+            <select class="custom-select task-status col-sm-8" name="status" [(ngModel)]="status">
+              <option *ngFor="let status of statuses" [value]="status.value">{{status.label}}</option>
+            </select>
+          </div>
+          <div class="form-group row flex-row">
+            <label class="col-sm-3" for="datepickerDate">Due Date:</label>
+            <dp-date-picker (onChange)="onDueDateChange($event)" [(ngModel)]="datepickerDate" name="datepickerDate" theme="dp-material" [config]="datePickerConfig"></dp-date-picker>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="confirm-btn" [disabled]="!title" (click)="saveTask()">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="close.emit()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

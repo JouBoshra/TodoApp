@@ -1,0 +1,41 @@
+<!-- <app-add-task (taskAdded)="taskAdded($event)"></app-add-task> -->
+<app-task-filters [labels]="labels" (filtersChanged)="filtersChanged($event)"></app-task-filters>
+<div class="task-list-wrapper" cdkDropListGroup>
+  <app-task-group
+    groupName="new"
+    groupLabel="open"
+    [tasks]="filteredTasks.get('new')"
+    (addTask)="addTask($event)"
+    (editTask)="editTask($event)"
+    (deleteTask)="deleteTask($event)"
+    (changeTaskStatus)="changeTaskStatus($event)"
+    (drop)="drop($event)"
+    (edited)="taskEdited($event)"
+  ></app-task-group>
+  <app-task-group
+    groupName="in_progress"
+    groupLabel="in progress"
+    [tasks]="filteredTasks.get('in_progress')"
+    (addTask)="addTask($event)"
+    (editTask)="editTask($event)"
+    (deleteTask)="deleteTask($event)"
+    (changeTaskStatus)="changeTaskStatus($event)"
+    (drop)="drop($event)"
+    (edited)="taskEdited($event)"
+  ></app-task-group>
+  <app-task-group
+    groupName="completed"
+    groupLabel="completed"
+    [tasks]="filteredTasks.get('completed')"
+    (addTask)="addTask($event)"
+    (editTask)="editTask($event)"
+    (deleteTask)="deleteTask($event)"
+    (changeTaskStatus)="changeTaskStatus($event)"
+    [showDueDate]="false"
+    [showArchive]="true"
+    (archiveTask)="archiveTask($event)"
+    (drop)="drop($event)"
+    (edited)="taskEdited($event)"
+  ></app-task-group>
+</div>
+<app-task-settings *ngIf="taskToEdit || addingTaskInGroup" [settings]="taskToEdit" [listName]="addingTaskInGroup" (edited)="taskEdited($event)" (added)="taskAdded($event)" (close)="closeDialog()"></app-task-settings>

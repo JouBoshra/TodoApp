@@ -1,0 +1,83 @@
+.modal-wrapper {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+
+  .add-labels {
+    .label-show {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      .label {
+        margin-top: 5px;
+      }
+    }
+    .label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: bold;
+      margin-right: 5px;
+      padding: 2px 4px;
+      border-radius: 4px;
+
+      .remove {
+        cursor: pointer;
+        background: #555;
+        color: #fff;
+        padding: 0 4px;
+        border-radius: 50%;
+      }
+    }
+      .add-button {
+        font-size: 30px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .label-form {
+        .label {
+          cursor: pointer;
+        }
+      }
+      .custom-label-form {
+        margin-top: 10px;
+        
+        input {
+          height: 30px;
+          padding: 0.25rem;
+          font-size: 0.8rem;
+        }
+
+        select {
+          height: 30px;
+          margin-left: 5px;
+          padding: .2rem;
+          font-size: 0.8rem;
+        }
+
+        .confirm-btn {
+          padding: 0;
+        }
+
+        .done {
+          background-color: #6c757d;
+          border-color: #6c757d;
+        }
+      }
+    }
+
+    .confirm-btn {
+      padding: 7px 20px;
+    }
+
+    .task-status {
+      &.custom-select {
+        max-width: 150px;
+      }
+    }
+  }

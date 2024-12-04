@@ -1,0 +1,32 @@
+<div class="list-item" (click)="toggleShowDetails()" cdkDrag>
+  <div class="top-row">
+    <span class="title">
+      <mat-icon>drag_indicator</mat-icon>
+      <span>{{task.title}}</span>
+    </span>
+    
+    <div class="action-buttons">
+      <select class="custom-select col-sm-8" name="status" [(ngModel)]="status" (change)="onStatusChange()" (click)="onChangeStatusClick($event)">
+        <option *ngFor="let status of statuses" [value]="status.value">{{status.label}}</option>
+      </select>
+      <mat-icon (click)="onEditTaskClick($event)">edit</mat-icon>
+      <mat-icon (click)="onDeleteTaskClick($event)">delete</mat-icon>
+      <mat-icon *ngIf="showArchive && !task.archived" (click)="onArchiveTaskClick($event)">archive</mat-icon>
+      <!-- <div class="task-actions-mo" -->
+    </div>
+  </div>
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <span *ngIf="showDueDate && dueDateLabel.label" [className]="'due-date-label badge ' + dueDateLabel.type">{{ dueDateLabel.label }}</span>
+    <div class="labels-list" *ngIf="task.labels">
+      <span *ngFor="let label of objectEntries(task.labels)" [className]="'label badge-' + label[1]" >
+        {{label[0]}}
+      </span>
+    </div>
+  </div>
+  <div class="collapse" [id]="'description'+task._id">
+    <div class="card card-body task-description">
+      {{task.description}}
+    </div>
+  </div>
+</div>
+<app-task-details *ngIf="showDetails" [task]="task" [dueDate]="dueDateLabel" (close)="toggleShowDetails()" (edited)="showDetails = false;edited.emit($event)"></app-task-details>

@@ -1,0 +1,62 @@
+<div class="modal-wrapper">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title task-title" contenteditable (input)="onContentEdit('title', $event)">{{ task.title }}</div>
+        <!-- <textarea *ngIf="editing === 'title'" class="form-control col-sm-8 title" name="title" [(ngModel)]="title" required></textarea> -->
+        <button type="button" class="close" (click)="close.emit()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <select class="custom-select task-status col-sm-8" name="status" [(ngModel)]="status" (change)="touched=true">
+          <option *ngFor="let status of statuses" [value]="status.value">{{status.label}}</option>
+        </select>
+          <!-- <div class="status">Status:&nbsp;{{ task.status }}</div> -->
+          <!-- <div class="task-title">
+            {{ task.title }}
+          </div> -->
+          <div class="description" [attr.data-placeholder]="task.description ? '': 'No description.'" contenteditable (input)="onContentEdit('description',$event)">
+              {{ task.description }}
+          </div>
+          <div class="due-date-wrapper">
+            <div *ngIf="dueDate && dueDate.label" [class]="'due-date-label '+'badge '+dueDate.type">
+              {{ dueDate.label }}
+            </div>
+            <div *ngIf="!dueDate || !dueDate.label" class="due-date-label">No due date set</div>
+          </div>
+          <div class="bottom-wrapper">
+            <div class="labels-wrapper-parent">
+              <div class="labels-wrapper">
+                <span *ngFor="let label of objectEntries(labels || {})"  [className]="'label badge-' + label[1]" >
+                  {{label[0]}}
+                  <button class="remove" (click)="removeLabel(label)">x</button>
+                </span>
+                <mat-icon class="add-label-trigger" (click)="showAddLabelForm = !showAddLabelForm">local_offer</mat-icon>
+              </div>
+                <div class="add-label" *ngIf="showAddLabelForm">
+                  <div>
+                    <span *ngFor="let label of objectEntries(availableLabels)" (click)="addLabel(label)" [className]="'label badge-' + label[1]" >
+                      {{label[0]}}
+                    </span>
+                  </div>
+                  <div class="custom-label-form row">
+                      <input type="text" class="form-control col-sm-4" name="customLabel" [(ngModel)]="customLabel" placeholder="Custom Label..."/>
+                      <select class="custom-select col-sm-3" name="customLabelType" [(ngModel)]="customLabelType">
+                        <option *ngFor="let labelType of labelTypes" [value]="labelType.value">{{ labelType.label }}</option>
+                      </select>
+                      <mat-icon [class]="'add-button ' + (!customLabel ? 'disabled' : '')" (click)="addLabel()">add_circle</mat-icon>
+                      <mat-icon class="add-done" (click)="showAddLabelForm = false">cancel</mat-icon>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+            <div class="action-buttons" *ngIf="touched">
+              <button class="confirm-btn" (click)="onEditSave()">Save</button>
+              <button class="btn btn-secondary" (click)="close.emit()">Close</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

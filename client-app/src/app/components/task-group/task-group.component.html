@@ -1,0 +1,27 @@
+<section class="task-list" >
+  <!-- <a  class="list-collapse-btn" data-toggle="collapse" [href]="'#'+listId" role="button" aria-expanded="true" [attr.aria-controls]="listId" (click)="toggleListCollapse()"> -->
+    <div [className]="'text-uppercase task-group-header '+ groupName">
+    {{groupLabel}}
+      <!-- <mat-icon>{{ collapsed ? "arrow_drop_down" : "arrow_drop_up" }}</mat-icon> -->
+      <span class="top-right">
+        <mat-icon (click)="addTask.emit(groupName)" >add</mat-icon>
+        <input type="checkbox" name="showArchivedTasks" *ngIf="showArchive" [(ngModel)]="showArchivedTasks" title="Show Archived Tasks" (change)="filterTasks()">
+        <mat-icon class="archive-button"  *ngIf="showArchive" (click)="archiveTask.emit('all')">archive</mat-icon>
+      </span>
+      <!-- <button class="btn btn-secondary archive-button">Archive All</button> -->
+    </div>
+  <!-- </a> -->
+    <div class="card card-body" cdkDropList [cdkDropListData]="groupName" (cdkDropListDropped)="drop.emit($event)">
+      <app-task-item
+       *ngFor="let task of filteredTasks"
+        [task]="task.toJS()"
+        (editTask)="editTask.emit($event)"
+        (deleteTask)="onTaskDelete($event)"
+        (changeTaskStatus)="changeTaskStatus.emit($event)"
+        [showDueDate]="showDueDate"
+        [showArchive]="showArchive"
+        (archiveTask)="archiveTask.emit($event)"
+        (edited)="edited.emit($event)"
+      ></app-task-item>
+    </div>
+</section>

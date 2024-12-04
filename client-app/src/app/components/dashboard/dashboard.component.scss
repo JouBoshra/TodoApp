@@ -1,0 +1,6 @@
+.task-list-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: column;
+  grid-gap: 10px;
+}

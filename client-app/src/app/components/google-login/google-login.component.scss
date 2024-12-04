@@ -1,0 +1,18 @@
+.google-oath {
+  .separator {
+    color: #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+
+    .horizontal-line {
+      width: 100px;
+      border: 1px solid #aaa;
+      margin: 4px;
+    }
+  }
+  img {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,55 @@
+.task-filters {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  .custom-select {
+    height: unset;
+    padding: 6px;
+    font-size: 14px;
+    vertical-align: text-bottom;
+
+    &.date-name {
+      max-width: 80px;
+    }
+
+    &.filter-label {
+      max-width: 120px;
+    }
+  }
+
+  .search-string-wrapper {
+    position: relative;
+    .search-string {
+      width: 200px;
+      height: 34px;
+
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+
+    &::after {
+      font-family: 'Material Icons';
+      content: "search";
+      position: absolute;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      top: 2px;
+      right: 6px;
+    }
+  }
+
+  .confirm-btn {
+    padding: 5px 8px;
+    font-size: 14px;
+  }
+
+  .btn.btn-secondary {
+    padding: 3px 6px;
+    margin-top: 1px;
+  }
+}

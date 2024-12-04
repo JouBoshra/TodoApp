@@ -1,0 +1,12 @@
+<div class="task-add-form">
+  <form (submit)="onFormSubmit()">
+      <div class="add-form row">
+        <div class="form-group col-sm-10">
+          <input class="form-control" name="title" required [(ngModel)]="title" >
+          <a class="more-settings" (click)="toggleMoreSettings($event)" href="#">Advance</a>
+        </div>
+        <button class="confirm-btn">Add Task</button>
+      </div>
+  </form>
+  <app-task-settings *ngIf="showMoreSettings" [settings]="{title: title}" (saved)="taskSaved($event)" (close)="closeMoreSettings()"></app-task-settings>
+</div>

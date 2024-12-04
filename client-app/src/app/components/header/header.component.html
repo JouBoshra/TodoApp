@@ -1,0 +1,16 @@
+<header>
+  <!-- App Logo/Brand -->
+  <a class="app-brand" routerLink="/">
+    <img class="logo" src="../../../assets/logo-icon.png" alt="App Logo" />
+    {{appName}}
+  </a>
+
+  <div class="top-right">
+    <!-- User profile info (if logged in) -->
+  
+    <!-- Register, Login buttons (otherwise) -->
+    <a class="confirm-btn" *ngIf="!auth.isLoggedIn()" [routerLink]="['/register']">Register</a>
+    <a class="confirm-btn" *ngIf="!auth.isLoggedIn()" [routerLink]="['/login']">Login</a>
+    <a class="confirm-btn" *ngIf="auth.isLoggedIn()" href="#" (click)="onLogout($event)">Logout</a>
+  </div>
+</header>

@@ -1,0 +1,41 @@
+.illustration-group {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  .description {
+    width: 50%;
+
+    .title {
+      margin-bottom: 20px;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      li {
+          list-style-type: none;
+          background: #eee;
+          padding: 10px;
+          margin: 10px;
+          border-radius: 4px;
+          width: fit-content;
+
+          &:nth-child(even) {
+            align-self: flex-end;
+          }
+      }
+    }
+  }
+  
+  img {
+    width: 250px;
+  }
+  
+  &:nth-child(2) {
+    img {
+      width: 300px;
+    }
+  }
+}
