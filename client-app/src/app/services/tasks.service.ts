@@ -1,41 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { Http, Headers } from '@angular/http';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
-  apiEndpoint: string = ''; //'http://localhost:3000';
-  userApiRoot: string = '/api/tasks';
+  private apiUrl = '/api/tasks';
+
   constructor(private http: HttpClient) { }
 
-  getTasks() {
-    return this.http.get(this.getRootApi())
+  getTasks(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/`);
   }
 
-  getRootApi(route = '') {
-    return `${this.apiEndpoint}${this.userApiRoot}${route}`;
+  addTask(task: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/save`, task);
   }
 
-  saveTask(task) {
-    return this.http.post(this.getRootApi('/save'), task);
+  editTask(task: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/save`, task);
   }
 
-  deleteTask(taskId) {
-    return this.http.delete(this.getRootApi(`/${taskId}`));
+  deleteTask(taskId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${taskId}`);
   }
 
-  changeStatus(payload) {
-    return this.http.post(this.getRootApi('/change-status'), payload);
+  changeStatus(payload: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/change-status`, payload);
   }
 
-  archiveTasks(taskId = 'all') {
-    return this.http.get(this.getRootApi('/archive/'+taskId));
+  archiveTasks(taskId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/archive/${taskId}`);
   }
 
-  updateOrders(newOrders) {
-    return this.http.post(this.getRootApi('/update/order'), {taskOrders: newOrders});
+  updateOrders(taskOrders: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/update/order`, { taskOrders });
   }
 }

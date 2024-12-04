@@ -1,6 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IDatePickerConfig } from 'ng2-date-picker';
-import { staticLabels } from '../task-settings/constants';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-task-filters',
@@ -8,53 +6,32 @@ import { staticLabels } from '../task-settings/constants';
   styleUrls: ['./task-filters.component.scss']
 })
 export class TaskFiltersComponent implements OnInit {
-  @Input() labels: object = staticLabels
-  dateFilterName: string = '';
-  datepickerDate: any;
-  datePickerConfig: IDatePickerConfig;
-  label: String = '';
-  searchString: String = '';
+  @Input() labels: any[] = [];
   @Output() filtersChanged: EventEmitter<any> = new EventEmitter();
 
-  constructor() {
-    this.datePickerConfig = {
-      format: "YYYY-MM-DD"
-    };
-   }
+  filter = {
+    label: '',
+    date: '',
+    search: '',
+    dateFilterName: 'dueDate'
+  };
+
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   applyFilters() {
-    let filters = {};
-    if (this.dateFilterName && this.datepickerDate) {
-      filters['dateFilterName'] = this.dateFilterName;
-      filters['date'] = this.datepickerDate.format('YYYY-MM-DD');
-    }
-    if (this.label) {
-      filters['label'] = this.label;
-    }
-    if (this.searchString) {
-      filters['search'] = this.searchString;
-    }
-    this.filtersChanged.emit(filters);
+    this.filtersChanged.emit(this.filter);
   }
 
-  onChange() {
-    this.applyFilters();
-  }
-
-  onKeyUp({ key }) {
-    if (key === "Enter") {
-      this.applyFilters();
-    }
-  }
-
-  clear() {
-    this.dateFilterName = '';
-    this.datepickerDate = undefined;
-    this.label = '';
-    this.searchString = '';
-    this.filtersChanged.emit({});
+  clearFilters() {
+    this.filter = {
+      label: '',
+      date: '',
+      search: '',
+      dateFilterName: 'dueDate'
+    };
+    this.filtersChanged.emit(this.filter);
   }
 }

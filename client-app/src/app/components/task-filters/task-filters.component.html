@@ -1,35 +1,21 @@
-<section class="task-filters">
-  <strong>Filters:</strong>&nbsp;
-  <!-- Date filter -->
-  <select class="custom-select col-sm-8 date-name" name="dateFilterName" [(ngModel)]="dateFilterName" (change)="onChange()">
-    <option value="">Select</option>
-    <option value="dueDate">Due</option>
-    <option value="createdAt">Created</option>
-  </select>
-  &nbsp;On:&nbsp;
-  <dp-date-picker
-    [(ngModel)]="datepickerDate"
-    name="datepickerDate"
-    theme="dp-material"
-    [config]="datePickerConfig"
-    (onChange)="onChange()"
-  ></dp-date-picker>
-  
-  &nbsp;&nbsp;
-  <!-- Labels filter -->
-  <select class="custom-select col-sm-8 filter-label" name="label" [(ngModel)]="label" (change)="onChange()">
-    <option value="">Select label</option>
-    <option *ngFor="let label of labels" [value]="label">{{label}}</option>
-  </select>
+<div class="filters">
+  <div class="filter-group">
+    <label for="label">Label:</label>
+    <select [(ngModel)]="filter.label" (change)="applyFilters()">
+      <option value="">All</option>
+      <option *ngFor="let label of labels" [value]="label">{{ label }}</option>
+    </select>
+  </div>
 
-  &nbsp;&nbsp;
-  <!-- Search string -->
-  <span class="search-string-wrapper">
-    <input class="form-control search-string" placeholder="Search title/description" [(ngModel)]="searchString" name="searchString" (keyup)="onKeyUp($event)">
-  </span>
+  <div class="filter-group">
+    <label for="date">Due Date:</label>
+    <input type="date" [(ngModel)]="filter.date" (change)="applyFilters()" />
+  </div>
 
-  <!-- <button class="confirm-btn" (click)="applyFilters()">Apply Filters</button> -->
-  &nbsp;
-  <button class="btn btn-secondary" (click)="clear()">Clear</button>
-  </section>
-  
+  <div class="filter-group">
+    <label for="search">Search:</label>
+    <input type="text" [(ngModel)]="filter.search" (input)="applyFilters()" placeholder="Search tasks..." />
+  </div>
+
+  <button (click)="clearFilters()">Clear Filters</button>
+</div>

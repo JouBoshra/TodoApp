@@ -15,8 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
-import { ValidateService } from './services/validate.service';
-import { AuthService } from './services/auth.service';
+
 import { TasksService } from './services/tasks.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -59,8 +58,7 @@ import { GoogleLoginComponent } from './components/google-login/google-login.com
     DragDropModule
   ],
   providers: [
-    ValidateService,
-    AuthService,
+
     TasksService,
     FlashMessagesService,
     AuthGuard,
